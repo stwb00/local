@@ -1,0 +1,101 @@
+.main-content {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.section-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.search-bar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.basic-search {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 300px;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-bar span {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.filter-btn {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 0.9rem;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.product-image img {
+    width: 100%;
+    height: 200px;
+    background-color: #f0f0f0;
+}
+
+.product-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.perfume-notes {
+    margin-top: 10px;
+}
+
+.perfume-notes p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.perfume-notes ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.perfume-notes li {
+    margin-bottom: 2px;
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
