@@ -58,7 +58,53 @@
                         <div class="promotion-label">REGALO</div>
                         <div class="promotion-date">Hasta 20/11</div>
                         <div class="promotion-offer">Regalo por tu Compra</div>
-                        <div class="promotion-description">En compras superiores a $50.000 recibí un neceser Essence exclusivo.</div>
+                        <div class="promotion-description">En compras superiores a $100.000 recibí un neceser Essence exclusivo.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="calculator-section">
+                <h2 class="section-title">Calculadora de Promociones</h2>
+                <div class="calculator-container">
+                    <div class="products-table">
+                        <table class="calculator-table">
+                            <thead>
+                                <tr>
+                                    <th>Perfume</th>
+                                    <th>Marca</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calculator-items">
+                                <!-- Los productos se cargarán dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="calculator-actions">
+                        <button id="clear-calculator" class="btn-clear">Limpiar Tabla</button>
+                        <button id="calculate-total" class="btn-calculate">Calcular Total</button>
+                    </div>
+                    
+                    <div class="calculator-summary">
+                        <div class="summary-item">
+                            <span>Total sin promociones:</span>
+                            <span id="total-without-promo">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total con promociones:</span>
+                            <span id="total-with-promo">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Descuento aplicado:</span>
+                            <span id="discount-amount">$0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Regalo:</span>
+                            <span id="gift-info">No aplica</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -191,6 +237,141 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const perfumes = [
+            { id: 1, name: "Fragancia Elegante", brand: "Armani", price: 89900 },
+            { id: 2, name: "Aroma Seductor", brand: "Chanel", price: 125500 },
+            { id: 3, name: "Esencia Natural", brand: "Dior", price: 78250 },
+            { id: 4, name: "Dulce Tentación", brand: "Armani", price: 95750 },
+            { id: 5, name: "Aire Fresco", brand: "Versace", price: 67990 },
+            { id: 6, name: "Misterio Oriental", brand: "Tom Ford", price: 142000 }
+        ];
+
+        let calculator = {};
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCalculator();
+            setupEventListeners();
+        });
+
+        function initializeCalculator() {
+            const calculatorItemsContainer = document.getElementById('calculator-items');
+            calculatorItemsContainer.innerHTML = '';
+
+            perfumes.forEach(perfume => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${perfume.name}</td>
+                    <td>${perfume.brand}</td>
+                    <td>$${perfume.price.toLocaleString()}</td>
+                    <td>
+                        <button onclick="updateQuantity(${perfume.id}, -1)">-</button>
+                        <span id="qty-${perfume.id}">0</span>
+                        <button onclick="updateQuantity(${perfume.id}, 1)">+</button>
+                    </td>
+                    <td id="subtotal-${perfume.id}">$0</td>
+                `;
+                calculatorItemsContainer.appendChild(row);
+            });
+        }
+
+        function setupEventListeners() {
+            document.getElementById('clear-calculator').addEventListener('click', clearCalculator);
+            document.getElementById('calculate-total').addEventListener('click', calculateTotal);
+        }
+
+        function updateQuantity(perfumeId, change) {
+            if (!calculator[perfumeId]) {
+                calculator[perfumeId] = 0;
+            }
+            
+            calculator[perfumeId] += change;
+            
+            if (calculator[perfumeId] < 0) {
+                calculator[perfumeId] = 0;
+            }
+
+            document.getElementById(`qty-${perfumeId}`).textContent = calculator[perfumeId];
+            
+            const perfume = perfumes.find(p => p.id === perfumeId);
+            const subtotal = calculator[perfumeId] * perfume.price;
+            document.getElementById(`subtotal-${perfumeId}`).textContent = `$${subtotal.toLocaleString()}`;
+        }
+
+        function clearCalculator() {
+            calculator = {};
+            
+            perfumes.forEach(perfume => {
+                document.getElementById(`qty-${perfume.id}`).textContent = '0';
+                document.getElementById(`subtotal-${perfume.id}`).textContent = '$0';
+            });
+            
+            document.getElementById('total-without-promo').textContent = '$0';
+            document.getElementById('total-with-promo').textContent = '$0';
+            document.getElementById('discount-amount').textContent = '$0';
+            document.getElementById('gift-info').textContent = 'No aplica';
+        }
+
+        function calculateTotal() {
+            let totalWithoutPromo = 0;
+            let totalWithPromo = 0;
+            let discountAmount = 0;
+            let giftInfo = 'No aplica';
+
+            Object.keys(calculator).forEach(perfumeId => {
+                const quantity = calculator[perfumeId];
+                const perfume = perfumes.find(p => p.id === parseInt(perfumeId));
+                if (perfume && quantity > 0) {
+                    totalWithoutPromo += perfume.price * quantity;
+                }
+            });
+
+            totalWithPromo = totalWithoutPromo;
+
+            if (totalWithoutPromo > 0) {
+                let armaniItems = 0;
+                Object.keys(calculator).forEach(perfumeId => {
+                    const quantity = calculator[perfumeId];
+                    const perfume = perfumes.find(p => p.id === parseInt(perfumeId));
+                    if (perfume && perfume.brand === 'Armani' && quantity > 0) {
+                        armaniItems += quantity;
+                    }
+                });
+                
+                if (armaniItems >= 2) {
+                    let armaniCount = 0;
+                    Object.keys(calculator).forEach(perfumeId => {
+                        const quantity = calculator[perfumeId];
+                        const perfume = perfumes.find(p => p.id === parseInt(perfumeId));
+                        if (perfume && perfume.brand === 'Armani' && quantity > 0) {
+                            for (let i = 0; i < quantity; i++) {
+                                armaniCount++;
+                                if (armaniCount % 2 === 0) {
+                                    discountAmount += perfume.price * 0.5;
+                                }
+                            }
+                        }
+                    });
+                }
+
+                totalWithPromo = totalWithoutPromo - discountAmount;
+
+                const blackWeekDiscount = totalWithPromo * 0.3;
+                discountAmount += blackWeekDiscount;
+                totalWithPromo = totalWithPromo - blackWeekDiscount;
+
+                if (totalWithoutPromo >= 100000) {
+                    giftInfo = 'Neceser Essence exclusivo';
+                }
+            }
+
+            document.getElementById('total-without-promo').textContent = `$${totalWithoutPromo.toLocaleString()}`;
+            document.getElementById('total-with-promo').textContent = `$${totalWithPromo.toLocaleString()}`;
+            document.getElementById('discount-amount').textContent = `$${discountAmount.toLocaleString()}`;
+            document.getElementById('gift-info').textContent = giftInfo;
+        }
+    </script>
 </body>
 
 </html>
