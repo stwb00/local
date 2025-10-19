@@ -62,6 +62,23 @@
     color: #666;
 }
 
+.promotion-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.promotion-details p {
+    margin: 5px 0;
+    text-align: left;
+}
+
+.promotion-details strong {
+    color: #333;
+}
+
 .payment-plans-section .section-title {
     margin-bottom: 30px;
 }

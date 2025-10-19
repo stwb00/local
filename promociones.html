@@ -44,7 +44,11 @@
                         <div class="promotion-label">ESPECIAL</div>
                         <div class="promotion-date">Hasta 31/10</div>
                         <div class="promotion-offer">50% OFF Segunda Fragancia</div>
-                        <div class="promotion-description">En fragancias seleccionadas de Armani</div>
+                        <div class="promotion-description">En fragancias de Armani</div>
+                        <div class="promotion-details">
+                            <p><strong>¿Cómo funciona?</strong></p>
+                            <p>Se aplica 50% de descuento a cada segunda fragancia de Armani</p>
+                        </div>
                     </div>
 
                     <div class="promotion-card">
@@ -52,13 +56,21 @@
                         <div class="promotion-date">Hasta 15/11</div>
                         <div class="promotion-offer">30% OFF</div>
                         <div class="promotion-description">Descuento aplicable en toda la tienda</div>
+                        <div class="promotion-details">
+                            <p><strong>¿Cómo funciona?</strong></p>
+                            <p>Se aplica 30% de descuento sobre el total final después de aplicar otros descuentos</p>
+                        </div>
                     </div>
 
                     <div class="promotion-card">
                         <div class="promotion-label">REGALO</div>
                         <div class="promotion-date">Hasta 20/11</div>
                         <div class="promotion-offer">Regalo por tu Compra</div>
-                        <div class="promotion-description">En compras superiores a $100.000 recibí un neceser Essence exclusivo.</div>
+                        <div class="promotion-description">En compras superiores a $100.000</div>
+                        <div class="promotion-details">
+                            <p><strong>¿Cómo funciona?</strong></p>
+                            <p>Con tu compra superior o igual a $100.000 recibí un neceser Essence exclusivo.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -94,12 +106,12 @@
                             <span id="total-without-promo">$0</span>
                         </div>
                         <div class="summary-item">
-                            <span>Total con promociones:</span>
-                            <span id="total-with-promo">$0</span>
-                        </div>
-                        <div class="summary-item">
                             <span>Descuento aplicado:</span>
                             <span id="discount-amount">$0</span>
+                        </div>
+                        <div class="summary-item">
+                        <span>Total:</span>
+                            <span id="total-with-promo">$0</span>
                         </div>
                         <div class="summary-item">
                             <span>Regalo:</span>
@@ -361,7 +373,7 @@
                 discountAmount += blackWeekDiscount;
                 totalWithPromo = totalWithPromo - blackWeekDiscount;
 
-                if (totalWithoutPromo >= 100000) {
+                if (totalWithPromo >= 100000) {
                     giftInfo = 'Neceser Essence exclusivo';
                 }
             }
