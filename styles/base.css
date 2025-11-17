@@ -30,6 +30,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo a {
@@ -210,9 +211,32 @@ body {
     .navbar {
         display: none;
     }
+
+    .navbar.navbar-open {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 20px 0;
+        background-color: #fff;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 16px 16px;
+        z-index: 1000;
+    }
+
+    .navbar.navbar-open .navbar-items {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
     
     .menu-toggle {
         display: flex;
+    }
+
+    .menu-toggle.is-open span {
+        background-color: #D4AF37;
     }
     
     .logo h1 {
