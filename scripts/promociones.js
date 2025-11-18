@@ -21,15 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
         perfumes.forEach((perfume) => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${perfume.name}</td>
-                <td>${perfume.brand}</td>
-                <td>$${perfume.price.toLocaleString()}</td>
-                <td>
-                    <button onclick="updateQuantity(${perfume.id}, -1)">-</button>
-                    <span id="qty-${perfume.id}">0</span>
-                    <button onclick="updateQuantity(${perfume.id}, 1)">+</button>
+                <td data-label="Perfume">${perfume.name}</td>
+                <td data-label="Marca">${perfume.brand}</td>
+                <td data-label="Precio">$${perfume.price.toLocaleString()}</td>
+                <td data-label="Cantidad">
+                    <div class="qty-controls">
+                        <button onclick="updateQuantity(${perfume.id}, -1)">-</button>
+                        <span id="qty-${perfume.id}">0</span>
+                        <button onclick="updateQuantity(${perfume.id}, 1)">+</button>
+                    </div>
                 </td>
-                <td id="subtotal-${perfume.id}">$0</td>
+                <td data-label="Subtotal" id="subtotal-${perfume.id}">$0</td>
             `;
             calculatorItemsContainer.appendChild(row);
         });

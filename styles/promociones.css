@@ -182,6 +182,16 @@
     border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
+.products-table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.products-table .calculator-table {
+    min-width: 620px;
+}
+
 .calculator-table {
     width: 100%;
     border-collapse: collapse;
@@ -224,6 +234,18 @@
 
 .calculator-table button:hover {
     background-color: rgba(212, 175, 55, 0.15);
+}
+
+.qty-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.qty-controls span {
+    min-width: 26px;
+    text-align: center;
+    font-weight: 600;
 }
 
 .calculator-actions {
